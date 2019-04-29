@@ -62,7 +62,6 @@ userMary.info(logger.info);
 userAlice.info(logger.info);
 
 
-
 let faketoken1 = createTokenName();
 let faketoken2 = createTokenName();
 

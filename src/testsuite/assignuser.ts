@@ -100,6 +100,8 @@ function promiseTransfer(level: number, levelMax: number, sum: number, userlist:
   });
 }
 async function transferMain() {
+  // transfer 10000 to user 0
+
   // assign to users according to a json file
   for (let i = 0; i < fileLst.length; i++) {
 
@@ -113,10 +115,19 @@ async function transferMain() {
       throw new Error(e);
     }
 
+    console.log(colors.red('\n************************************\n'))
     let usersList: User[] = [];
     for (let j = 0; j < users.length; j++) {
       usersList.push(new User('user' + j, SYSINFO, users[j]));
     }
+
+    // let result1 = await transferTo(userBoss.ctx, [usersList[0].getAddress(), SUM + '', 0.001 + '']);
+    // console.log(colors.green(usersList[0].name))
+    // console.log(result1);
+
+    // result1 = await getBalance(userBoss.ctx, [usersList[0].getAddress()]);
+    // console.log(colors.green(usersList[0].name))
+    // console.log(result1);
 
     console.log(colors.red('\n************************************\n'))
     console.log(colors.red('filename:'), fileLst[i])
@@ -128,23 +139,38 @@ async function transferMain() {
     console.log(colors.green(usersList[0].name))
     console.log(result);
 
+    console.log('*********** Transfer to user 0 *************\n');
+
     // transferNext(0, MAX_LEVEL, SUM, usersList);
     await promiseTransfer(0, MAX_LEVEL, SUM, usersList)
 
   }
 }
-async function main() {
-  console.log(colors.red('\n************************************\n'))
-  // let result = await transferTo(userBoss.ctx, [userLst[0].getAddress(), SUM + '', 0.001 + '']);
-  // console.log(colors.green(userLst[0].name))
-  // console.log(result);
+// async function main() {
+//   console.log(colors.red('\n************************************\n'))
 
-  // result = await getBalance(userBoss.ctx, [userLst[0].getAddress()]);
-  // console.log(colors.green(userLst[0].name))
-  // console.log(result);
+//   // assign to users according to a json file
+//   for (let i = 0; i < fileLst.length; i++) {
 
-  // transferNext(0, MAX_LEVEL, SUM);
+//     let usersBuf: Buffer;
+//     let users: any[];
+//     try {
+//       usersBuf = fs.readFileSync(fileLst[i]);
+//       users = JSON.parse(usersBuf.toString()).users;
+//     } catch (e) {
+//       console.log(colors.red('Error:'), e);
+//       throw new Error(e);
+//     }
 
-}
+//     let result = await transferTo(userBoss.ctx, [userLst[0].getAddress(), SUM + '', 0.001 + '']);
+//     console.log(colors.green(userLst[0].name))
+//     console.log(result);
 
+//     result = await getBalance(userBoss.ctx, [userLst[0].getAddress()]);
+//     console.log(colors.green(userLst[0].name))
+//     console.log(result);
+
+//   }
+// }
+// main();
 transferMain();
